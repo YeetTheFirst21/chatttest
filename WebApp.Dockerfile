@@ -19,10 +19,12 @@ RUN apk add --no-cache --virtual .build-deps \
     && apk add --no-cache \  
     libpq \  
     && pip install --no-cache-dir uwsgi  
-  
+
 COPY requirements.txt /usr/src/app/  
 RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt \  
-    && rm -rf /root/.cache  
+    && rm -rf /root/.cache 
+    
+RUN start.sh     
   
 COPY . /usr/src/app/  
 COPY --from=frontend /home/node/app/static  /usr/src/app/static/
